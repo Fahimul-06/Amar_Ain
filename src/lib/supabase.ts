@@ -6,11 +6,11 @@ type AuthListener = (event: string, session: Session | null) => void;
 
 const listeners = new Set<AuthListener>();
 function currentSession(): Session | null {
-  try { return JSON.parse(localStorage.getItem('amar_ain_session') || 'null'); } catch { return null; }
+  try { return JSON.parse(localStorage.getItem('amar_ain_session') || sessionStorage.getItem('amar_ain_session') || 'null'); } catch { return null; }
 }
 function saveSession(session: Session | null) {
   if (session) localStorage.setItem('amar_ain_session', JSON.stringify(session));
-  else localStorage.removeItem('amar_ain_session');
+  else { localStorage.removeItem('amar_ain_session'); sessionStorage.removeItem('amar_ain_session'); }
   listeners.forEach(fn => fn(session ? 'SIGNED_IN' : 'SIGNED_OUT', session));
 }
 async function request(path: string, init: RequestInit = {}) {
@@ -69,6 +69,7 @@ export const supabase: any = {
       try { const body=await request('/auth/register',{method:'POST',body:JSON.stringify({email,password,full_name:options?.data?.full_name,phone:options?.data?.phone,role:options?.data?.role})}); const session={user:body.user,access_token:body.token}; saveSession(session); return {data:{user:body.user,session},error:null}; } catch(e:any){return {data:{user:null,session:null},error:{message:e.message}};}
     },
     async signInWithPassword({email,password}:{email:string;password:string}) { try { const body=await request('/auth/login',{method:'POST',body:JSON.stringify({email,password})}); const session={user:body.user,access_token:body.token}; saveSession(session); return {data:{session,user:body.user},error:null}; } catch(e:any){return {data:{session:null,user:null},error:{message:e.message}};} },
+    async signInAdmin({email,password,remember=true}:{email:string;password:string;remember?:boolean}) { try { const body=await request('/auth/admin/login',{method:'POST',body:JSON.stringify({email,password})}); const session={user:body.user,access_token:body.token}; if (remember) saveSession(session); else { localStorage.removeItem('amar_ain_session'); sessionStorage.setItem('amar_ain_session',JSON.stringify(session)); listeners.forEach(fn=>fn('SIGNED_IN',session)); } return {data:{session,user:body.user},error:null}; } catch(e:any){return {data:{session:null,user:null},error:{message:e.message}};} },
     async signInWithOtp({phone}:{phone:string}) { try { await request('/auth/phone/request',{method:'POST',body:JSON.stringify({phone})}); return {data:{},error:null}; } catch(e:any){return {data:{},error:{message:e.message}};} },
     async verifyOtp({phone,token}:{phone:string;token:string;type:string}) { try { const body=await request('/auth/phone/verify',{method:'POST',body:JSON.stringify({phone,token})}); const session={user:body.user,access_token:body.token}; saveSession(session); return {data:{session,user:body.user},error:null}; } catch(e:any){return {data:{session:null,user:null},error:{message:e.message}};} },
     async signOut() { saveSession(null); return {error:null}; }

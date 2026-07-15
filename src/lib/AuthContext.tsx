@@ -11,6 +11,7 @@ type AuthContextValue = {
   loading: boolean;
   signUpEmail: (email: string, password: string, fullName: string, phone: string, role: Profile['role']) => Promise<{ error: string | null }>;
   signInEmail: (email: string, password: string) => Promise<{ error: string | null }>;
+  signInAdmin: (email: string, password: string, remember?: boolean) => Promise<{ error: string | null }>;
   signInPhone: (phone: string) => Promise<{ error: string | null }>;
   verifyOtp: (phone: string, token: string) => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
@@ -112,6 +113,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return { error: null };
   }, []);
 
+  const signInAdmin = useCallback<AuthContextValue['signInAdmin']>(async (email, password, remember = true) => {
+    const { error } = await supabase.auth.signInAdmin({ email, password, remember });
+    if (error) return { error: error.message };
+    return { error: null };
+  }, []);
+
   const signInPhone = useCallback<AuthContextValue['signInPhone']>(async (phone) => {
     const { error } = await supabase.auth.signInWithOtp({ phone });
     if (error) return { error: error.message };
@@ -132,7 +139,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ session, profile, loading, signUpEmail, signInEmail, signInPhone, verifyOtp, signOut, refreshProfile }}
+      value={{ session, profile, loading, signUpEmail, signInEmail, signInAdmin, signInPhone, verifyOtp, signOut, refreshProfile }}
     >
       {children}
     </AuthContext.Provider>
