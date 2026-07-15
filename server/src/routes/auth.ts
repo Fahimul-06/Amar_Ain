@@ -18,16 +18,6 @@ r.post('/register', async (req,res) => {
   await tables.get('profiles')!.create({ id,full_name,phone:phone||null,phone_verified:false,avatar_url:null,role,preferred_language:'en',location:null,bio:null,is_active:true,created_at:now,updated_at:now });
   res.status(201).json({ user:serialize(user), token:tokenFor(user) });
 });
-r.post('/admin/login', async(req,res)=>{
-  const {email,password}=req.body;
-  const normalizedEmail=String(email||'').trim().toLowerCase();
-  const user=await User.findOne({email:normalizedEmail});
-  const valid=user && user.password_hash && await bcrypt.compare(password||'',user.password_hash);
-  if(!valid) return res.status(401).json({message:'Invalid administrator credentials'});
-  if(user.role!=='admin') return res.status(403).json({message:'This account does not have administrator access'});
-  if(!user.is_active) return res.status(403).json({message:'Administrator account is disabled'});
-  res.json({user:serialize(user),token:tokenFor(user)});
-});
 r.post('/login', async(req,res)=>{
   const {email,password}=req.body; const user=await User.findOne({email:String(email||'').toLowerCase()});
   if(!user || !(await bcrypt.compare(password||'',user.password_hash))) return res.status(401).json({message:'Invalid email or password'});

@@ -3,7 +3,6 @@ import { useHashRoute, matchPath } from './lib/useHashRoute';
 import { Navbar, Footer } from './components/Navbar';
 import { Landing } from './pages/Landing';
 import { AuthPage } from './pages/Auth';
-import { AdminLoginPage } from './pages/AdminLogin';
 import { LawyersPage } from './pages/Lawyers';
 import { LawyerDetailPage } from './pages/LawyerDetail';
 import { ClientDashboard } from './pages/ClientDashboard';
@@ -23,7 +22,6 @@ function Router() {
 
   // Auth pages (no nav/footer)
   if (path === '/login') return <><div className="fixed right-4 top-4 z-50"><LanguageSwitcher /></div><AuthPage mode="login" navigate={navigate} /></>;
-  if (path === '/admin/login') return <AdminLoginPage navigate={navigate} />;
   if (path === '/register') return <><div className="fixed right-4 top-4 z-50"><LanguageSwitcher /></div><AuthPage mode="register" navigate={navigate} /></>;
 
   // Dashboard routes (no footer, custom nav)
@@ -31,7 +29,7 @@ function Router() {
   if (dashMatch) {
     if (loading) return <div className="flex min-h-screen items-center justify-center"><Spinner size={32} /></div>;
     if (!session || !profile) {
-      queueMicrotask(() => navigate(dashMatch.role === 'admin' ? '/admin/login' : '/login'));
+      queueMicrotask(() => navigate('/login'));
       return <div className="flex min-h-screen items-center justify-center"><Spinner size={32} /></div>;
     }
     const role = profile.role;

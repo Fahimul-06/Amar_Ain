@@ -84,7 +84,7 @@ export function AdminDashboard({ navigate, initialTab }: { navigate: (to: string
       nav={NAV}
       active={active}
       onNavigate={setActive}
-      onSignOut={() => { signOut(); navigate('/admin/login'); }}
+      onSignOut={() => { signOut(); navigate('/'); }}
       onHome={() => navigate('/')}
     >
       {loading ? (
