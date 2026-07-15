@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Scale, Menu, X, User, LogOut, LayoutDashboard, LifeBuoy, ChevronDown } from 'lucide-react';
+import { Scale, Menu, X, User, LogOut, LayoutDashboard, LifeBuoy, ChevronDown, ShieldCheck } from 'lucide-react';
 import { useAuth } from '../lib/AuthContext';
 import { Avatar } from './ui';
 import { LanguageSwitcher } from './LanguageSwitcher';
@@ -78,6 +78,13 @@ export function Navbar({ navigate }: { navigate: (to: string) => void; currentPa
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
+          <button
+            onClick={() => navigate(profile?.role === 'admin' ? '/dashboard/admin' : '/admin/login')}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-ink-200 bg-white px-2.5 py-1.5 text-xs font-semibold text-ink-600 transition hover:border-gold-400 hover:bg-gold-50 hover:text-ink-900"
+            title="Admin"
+          >
+            <ShieldCheck size={14} /> Admin
+          </button>
           <LanguageSwitcher compact />
           {!session ? (
             <>
@@ -165,6 +172,15 @@ export function Navbar({ navigate }: { navigate: (to: string) => void; currentPa
                 {s.label}
               </button>
             ))}
+            <button
+              onClick={() => {
+                navigate(profile?.role === 'admin' ? '/dashboard/admin' : '/admin/login');
+                setMenuOpen(false);
+              }}
+              className="flex w-full items-center justify-center gap-2 rounded-lg border border-ink-200 px-3 py-2 text-sm font-semibold text-ink-700 hover:border-gold-400 hover:bg-gold-50"
+            >
+              <ShieldCheck size={16} /> Admin
+            </button>
             <LanguageSwitcher />
             <div className="my-2 h-px bg-ink-100" />
             {!session ? (
