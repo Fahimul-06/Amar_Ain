@@ -27,15 +27,72 @@ const EXTRA_PHRASES: Record<string, string> = {
 };
 
 const WORDS: Record<string, string> = {
-  'search':'খুঁজুন','lawyer':'আইনজীবী','lawyers':'আইনজীবী','legal':'আইনি','information':'তথ্য','help':'সহায়তা','client':'ক্লায়েন্ট','clients':'ক্লায়েন্ট','admin':'অ্যাডমিন','user':'ব্যবহারকারী','users':'ব্যবহারকারী','booking':'বুকিং','bookings':'বুকিং','case':'মামলা','cases':'মামলা','payment':'পেমেন্ট','payments':'পেমেন্ট','message':'বার্তা','messages':'বার্তা','review':'পর্যালোচনা','reviews':'পর্যালোচনা','profile':'প্রোফাইল','service':'সেবা','services':'সেবা','status':'অবস্থা','pending':'অপেক্ষমাণ','completed':'সম্পন্ন','confirmed':'নিশ্চিত','cancelled':'বাতিল','open':'খোলা','closed':'বন্ধ','name':'নাম','phone':'ফোন','email':'ইমেইল','password':'পাসওয়ার্ড','date':'তারিখ','time':'সময়','amount':'পরিমাণ','fee':'ফি','total':'মোট','available':'উপলভ্য','verified':'যাচাইকৃত','language':'ভাষা','english':'ইংরেজি','bangla':'বাংলা','save':'সংরক্ষণ','delete':'মুছুন','edit':'সম্পাদনা','view':'দেখুন','add':'যোগ করুন','new':'নতুন','create':'তৈরি করুন','submit':'জমা দিন','send':'পাঠান','cancel':'বাতিল','yes':'হ্যাঁ','no':'না','all':'সব','none':'কোনোটিই নয়','support':'সহায়তা','contact':'যোগাযোগ','dashboard':'ড্যাশবোর্ড','account':'অ্যাকাউন্ট','logout':'লগ আউট','login':'লগ ইন','register':'নিবন্ধন','home':'হোম','details':'বিস্তারিত','description':'বিবরণ','category':'বিভাগ','location':'অবস্থান','rating':'রেটিং','experience':'অভিজ্ঞতা','year':'বছর','years':'বছর','document':'দলিল','documents':'দলিল','upload':'আপলোড','download':'ডাউনলোড','secure':'নিরাপদ','privacy':'গোপনীয়তা','terms':'শর্তাবলি','policy':'নীতি','report':'প্রতিবেদন','reports':'প্রতিবেদন','dispute':'বিরোধ','disputes':'বিরোধ','resolution':'সমাধান','active':'সক্রিয়','inactive':'নিষ্ক্রিয়','approved':'অনুমোদিত','rejected':'প্রত্যাখ্যাত','suspended':'স্থগিত','commission':'কমিশন','withdrawal':'উত্তোলন','earnings':'আয়','balance':'ব্যালেন্স','transaction':'লেনদেন','method':'পদ্ধতি','role':'ভূমিকা','actions':'কার্যক্রম','title':'শিরোনাম','body':'মূল লেখা','subject':'বিষয়','notes':'নোট','optional':'ঐচ্ছিক','required':'আবশ্যক','select':'নির্বাচন করুন','filter':'ফিল্টার','sort':'সাজান','reset':'রিসেট','more':'আরও','less':'কম','next':'পরবর্তী','previous':'পূর্ববর্তী','back':'ফিরুন','continue':'এগিয়ে যান','finish':'শেষ করুন'
+  'search':'খুঁজুন','lawyer':'আইনজীবী','lawyers':'আইনজীবী','legal':'আইনি','information':'তথ্য','help':'সহায়তা','client':'ক্লায়েন্ট','clients':'ক্লায়েন্ট','admin':'অ্যাডমিন','user':'ব্যবহারকারী','users':'ব্যবহারকারী','booking':'বুকিং','bookings':'বুকিং','case':'মামলা','cases':'মামলা','payment':'পেমেন্ট','payments':'পেমেন্ট','message':'বার্তা','messages':'বার্তা','review':'পর্যালোচনা','reviews':'পর্যালোচনা','profile':'প্রোফাইল','service':'সেবা','services':'সেবা','status':'অবস্থা','pending':'অপেক্ষমাণ','completed':'সম্পন্ন','confirmed':'নিশ্চিত','cancelled':'বাতিল','open':'খোলা','closed':'বন্ধ','name':'নাম','phone':'ফোন','email':'ইমেইল','password':'পাসওয়ার্ড','date':'তারিখ','time':'সময়','amount':'পরিমাণ','fee':'ফি','total':'মোট','available':'উপলভ্য','verified':'যাচাইকৃত','language':'ভাষা','english':'ইংরেজি','bangla':'বাংলা','save':'সংরক্ষণ','delete':'মুছুন','edit':'সম্পাদনা','view':'দেখুন','add':'যোগ করুন','new':'নতুন','create':'তৈরি করুন','submit':'জমা দিন','send':'পাঠান','cancel':'বাতিল','yes':'হ্যাঁ','no':'না','all':'সব','none':'কোনোটিই নয়','support':'সহায়তা','contact':'যোগাযোগ','dashboard':'ড্যাশবোর্ড','account':'অ্যাকাউন্ট','logout':'লগ আউট','login':'লগ ইন','register':'নিবন্ধন','home':'হোম','details':'বিস্তারিত','description':'বিবরণ','category':'বিভাগ','location':'অবস্থান','rating':'রেটিং','experience':'অভিজ্ঞতা','year':'বছর','years':'বছর','document':'দলিল','documents':'দলিল','upload':'আপলোড','download':'ডাউনলোড','secure':'নিরাপদ','privacy':'গোপনীয়তা','terms':'শর্তাবলি','policy':'নীতি','report':'প্রতিবেদন','reports':'প্রতিবেদন','dispute':'বিরোধ','disputes':'বিরোধ','resolution':'সমাধান','active':'সক্রিয়','inactive':'নিষ্ক্রিয়','approved':'অনুমোদিত','rejected':'প্রত্যাখ্যাত','suspended':'স্থগিত','commission':'কমিশন','withdrawal':'উত্তোলন','earnings':'আয়','balance':'ব্যালেন্স','transaction':'লেনদেন','method':'পদ্ধতি','role':'ভূমিকা','actions':'কার্যক্রম','title':'শিরোনাম','body':'মূল লেখা','subject':'বিষয়','notes':'নোট','optional':'ঐচ্ছিক','required':'আবশ্যক','select':'নির্বাচন করুন','filter':'ফিল্টার','sort':'সাজান','reset':'রিসেট','more':'আরও','less':'কম','next':'পরবর্তী','previous':'পূর্ববর্তী','back':'ফিরুন','continue':'এগিয়ে যান','finish':'শেষ করুন','today':'আজ','tomorrow':'আগামীকাল','yesterday':'গতকাল','online':'অনলাইন','offline':'অফলাইন','video':'ভিডিও','audio':'অডিও','chat':'চ্যাট','call':'কল','meeting':'সাক্ষাৎ','consultation':'পরামর্শ','directory':'তালিকা','overview':'সারসংক্ষেপ','management':'ব্যবস্থাপনা','settings':'সেটিংস','verification':'যাচাই','content':'কনটেন্ট','article':'প্রবন্ধ','articles':'প্রবন্ধসমূহ','subscription':'সাবস্ক্রিপশন','subscriptions':'সাবস্ক্রিপশনসমূহ','refund':'অর্থ ফেরত','draft':'খসড়া','published':'প্রকাশিত','archive':'সংরক্ষণাগার','address':'ঠিকানা','city':'শহর','district':'জেলা','office':'চেম্বার','professional':'পেশাগত','basic':'মৌলিক','information':'তথ্য','general':'সাধারণ','technical':'প্রযুক্তিগত','issue':'সমস্যা','feedback':'মতামত','suggestion':'পরামর্শ','security':'নিরাপত্তা','activity':'কার্যক্রম','recent':'সাম্প্রতিক','upcoming':'আসন্ন','current':'বর্তমান','price':'মূল্য','duration':'সময়কাল','minute':'মিনিট','minutes':'মিনিট','session':'সেশন','per':'প্রতি','from':'থেকে','with':'সঙ্গে','without':'ছাড়া','and':'ও','or':'অথবা','of':'এর','for':'জন্য','in':'এ','on':'এ','by':'দ্বারা','your':'আপনার','our':'আমাদের','my':'আমার','the':'','a':'একটি','an':'একটি','is':'হলো','are':'হলো','not':'নয়','no':'কোনো','found':'পাওয়া গেছে','try':'চেষ্টা করুন','enter':'লিখুন','choose':'বেছে নিন','update':'হালনাগাদ করুন','manage':'পরিচালনা করুন','processing':'প্রক্রিয়াধীন','success':'সফল','error':'ত্রুটি','loading':'লোড হচ্ছে','welcome':'স্বাগতম','join':'যোগ দিন','learn':'জানুন','read':'পড়ুন','see':'দেখুন','start':'শুরু করুন','end':'শেষ','day':'দিন','week':'সপ্তাহ','month':'মাস','hour':'ঘণ্টা'
 };
+
+const ACRONYMS: Record<string, string> = {
+  AI: 'এআই', API: 'এপিআই', BDT: 'টাকা', ID: 'আইডি', OTP: 'ওটিপি', PDF: 'পিডিএফ',
+  FAQ: 'সাধারণ প্রশ্ন', FAQs: 'সাধারণ প্রশ্নসমূহ', SSLCommerz: 'এসএসএলকমার্জ', URL: 'লিংক',
+  NID: 'এনআইডি', JWT: 'জেডব্লিউটি', SMS: 'এসএমএস', EN: 'ইংরেজি', AM: 'পূর্বাহ্ণ', PM: 'অপরাহ্ণ'
+};
+
+// Unknown English UI words are rendered phonetically in Bangla instead of being left in English.
+// This is a final fallback; meaningful UI phrases should still be added to PHRASES/WORDS.
+function transliterateEnglishWord(word: string): string {
+  const direct = ACRONYMS[word] || ACRONYMS[word.toUpperCase()];
+  if (direct) return direct;
+
+  const lower = word.toLowerCase();
+  const chunks: Array<[string, string]> = [
+    ['tion','শন'],['sion','শন'],['ture','চার'],['ough','ও'],['eigh','এই'],['igh','আই'],
+    ['ph','ফ'],['sh','শ'],['ch','চ'],['th','থ'],['wh','হো'],['qu','কু'],['ck','ক'],
+    ['ng','ং'],['ee','ি'],['oo','ু'],['ea','ি'],['ai','ে'],['ay','ে'],['oi','য়'],
+    ['ou','াউ'],['ow','াউ'],['au','অ'],['er','ার'],['or','র'],['ar','ার']
+  ];
+  const consonants: Record<string, string> = {
+    b:'ব',c:'ক',d:'ড',f:'ফ',g:'গ',h:'হ',j:'জ',k:'ক',l:'ল',m:'ম',n:'ন',p:'প',q:'ক',r:'র',s:'স',t:'ট',v:'ভ',w:'ওয়',x:'ক্স',y:'য়',z:'জ'
+  };
+  const vowels: Record<string, string> = { a:'া',e:'ে',i:'ি',o:'ো',u:'ু' };
+  let i = 0;
+  let out = '';
+  while (i < lower.length) {
+    let matched = false;
+    for (const [latin, bn] of chunks) {
+      if (lower.startsWith(latin, i)) {
+        out += bn;
+        i += latin.length;
+        matched = true;
+        break;
+      }
+    }
+    if (matched) continue;
+    const char = lower[i];
+    if (consonants[char]) {
+      out += consonants[char];
+    } else if (vowels[char]) {
+      // At the beginning, use an independent vowel; elsewhere use a vowel sign.
+      const independent: Record<string, string> = { a:'আ',e:'এ',i:'ই',o:'ও',u:'উ' };
+      out += i === 0 ? independent[char] : vowels[char];
+    } else {
+      out += char;
+    }
+    i += 1;
+  }
+  return out || word;
+}
 
 function translateText(text: string): string {
   const trimmed = text.trim();
   if (!trimmed || !/[A-Za-z]/.test(trimmed)) return text;
   const exact = PHRASES[trimmed] || EXTRA_PHRASES[trimmed];
   if (exact) return text.replace(trimmed, exact);
-  let out = trimmed.replace(/\b[A-Za-z][A-Za-z'-]*\b/g, (word) => WORDS[word.toLowerCase()] || word);
+
+  const out = trimmed.replace(/\b[A-Za-z][A-Za-z0-9'&+./-]*\b/g, (word) => {
+    const cleaned = word.replace(/[0-9&+./-]+$/g, '');
+    const suffix = word.slice(cleaned.length);
+    const translated = WORDS[cleaned.toLowerCase()] || ACRONYMS[cleaned] || transliterateEnglishWord(cleaned);
+    return translated + suffix;
+  });
   return text.replace(trimmed, out);
 }
 
