@@ -2,6 +2,7 @@ import { type ReactNode, useState } from 'react';
 import { Scale, Menu, X, LogOut } from 'lucide-react';
 import { useAuth } from '../lib/AuthContext';
 import { Avatar } from './ui';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export type NavItem = { label: string; icon: ReactNode; key: string };
 
@@ -95,6 +96,7 @@ export function DashboardShell({
               {subtitle && <p className="text-xs text-ink-500">{subtitle}</p>}
             </div>
           </div>
+          <LanguageSwitcher compact />
         </header>
 
         <main className="p-4 sm:p-6 lg:p-8">{children}</main>

@@ -15,7 +15,7 @@ r.post('/register', async (req,res) => {
   if (await User.findOne({ email: email.toLowerCase() })) return res.status(409).json({ message:'Email already registered' });
   const id=uuid(); const now=new Date();
   const user=await User.create({ id,email,password_hash:await bcrypt.hash(password,12),full_name,phone:phone||undefined,role,created_at:now,updated_at:now });
-  await tables.get('profiles')!.create({ id,full_name,phone:phone||null,phone_verified:false,avatar_url:null,role,location:null,bio:null,is_active:true,created_at:now,updated_at:now });
+  await tables.get('profiles')!.create({ id,full_name,phone:phone||null,phone_verified:false,avatar_url:null,role,preferred_language:'en',location:null,bio:null,is_active:true,created_at:now,updated_at:now });
   res.status(201).json({ user:serialize(user), token:tokenFor(user) });
 });
 r.post('/login', async(req,res)=>{
@@ -27,7 +27,7 @@ r.post('/login', async(req,res)=>{
 r.post('/phone/request', async(req,res)=>{ const {phone}=req.body; if(!phone) return res.status(400).json({message:'Phone required'}); res.json({message:'Development OTP generated', otp: process.env.NODE_ENV==='production'?undefined:'123456'}); });
 r.post('/phone/verify', async(req,res)=>{
  const {phone,token}=req.body; if(token!=='123456') return res.status(400).json({message:'Invalid OTP'});
- let user=await User.findOne({phone}); if(!user){const id=uuid(),now=new Date(); user=await User.create({id,phone,role:'client',full_name:'',created_at:now,updated_at:now}); await tables.get('profiles')!.create({id,full_name:'',phone,phone_verified:true,role:'client',is_active:true,created_at:now,updated_at:now});}
+ let user=await User.findOne({phone}); if(!user){const id=uuid(),now=new Date(); user=await User.create({id,phone,role:'client',full_name:'',created_at:now,updated_at:now}); await tables.get('profiles')!.create({id,full_name:'',phone,phone_verified:true,role:'client',preferred_language:'en',is_active:true,created_at:now,updated_at:now});}
  res.json({user:serialize(user),token:tokenFor(user)});
 });
 r.get('/me',auth,async(req,res)=>{const user=await User.findOne({id:req.user!.id}); if(!user)return res.status(404).json({message:'User not found'});res.json({user:serialize(user)});});

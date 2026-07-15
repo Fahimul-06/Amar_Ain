@@ -4,7 +4,7 @@ const base = { id: { type: String, required: true, unique: true, index: true }, 
 const flexible = (name: string) => mongoose.models[name] || mongoose.model(name, new Schema(base, { strict: false, collection: name, minimize: false }));
 
 export const User = mongoose.models.users || mongoose.model('users', new Schema({
-  ...base, email: { type: String, unique: true, sparse: true, lowercase: true, trim: true }, phone: { type: String, unique: true, sparse: true }, password_hash: String, role: { type: String, enum: ['client','lawyer','admin'], default: 'client' }, full_name: String, is_active: { type: Boolean, default: true }
+  ...base, email: { type: String, unique: true, sparse: true, lowercase: true, trim: true }, phone: { type: String, unique: true, sparse: true }, password_hash: String, role: { type: String, enum: ['client','lawyer','admin'], default: 'client' }, full_name: String, preferred_language: { type: String, enum: ['en','bn'], default: 'en' }, is_active: { type: Boolean, default: true }
 }, { collection: 'users' }));
 
 export const tables = new Map<string, mongoose.Model<any>>();

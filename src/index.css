@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -100,4 +101,12 @@ body {
   background: linear-gradient(90deg, #e9edf3 25%, #f5f7fa 50%, #e9edf3 75%);
   background-size: 200% 100%;
   animation: shimmer 1.6s linear infinite;
+}
+
+html[data-language="bn"] body,
+html[data-language="bn"] button,
+html[data-language="bn"] input,
+html[data-language="bn"] textarea,
+html[data-language="bn"] select {
+  font-family: "Noto Sans Bengali", system-ui, sans-serif;
 }

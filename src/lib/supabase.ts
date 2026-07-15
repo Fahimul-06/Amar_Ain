@@ -87,6 +87,7 @@ export type Profile = {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  preferred_language?: 'en' | 'bn';
 };
 
 export type LawyerCategory = {

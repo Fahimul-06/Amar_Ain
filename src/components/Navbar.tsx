@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Scale, Menu, X, User, LogOut, LayoutDashboard, LifeBuoy, ChevronDown } from 'lucide-react';
 import { useAuth } from '../lib/AuthContext';
 import { Avatar } from './ui';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export function Navbar({ navigate }: { navigate: (to: string) => void; currentPath: string }) {
   const { session, profile, signOut } = useAuth();
@@ -77,6 +78,7 @@ export function Navbar({ navigate }: { navigate: (to: string) => void; currentPa
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
+          <LanguageSwitcher compact />
           {!session ? (
             <>
               <button onClick={() => navigate('/login')} className="btn-ghost">
@@ -163,6 +165,7 @@ export function Navbar({ navigate }: { navigate: (to: string) => void; currentPa
                 {s.label}
               </button>
             ))}
+            <LanguageSwitcher />
             <div className="my-2 h-px bg-ink-100" />
             {!session ? (
               <>

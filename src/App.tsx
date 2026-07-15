@@ -12,6 +12,8 @@ import { LegalInfoPage, HowItWorksPage, ForLawyersPage } from './pages/InfoPages
 import { HelpCenterPage, SafetyPage, DisputesPage, ContactPage } from './pages/Support';
 import { PrivacyPolicyPage, TermsOfServicePage, BarCouncilCompliancePage } from './pages/Legal';
 import { Spinner } from './components/ui';
+import { LanguageProvider } from './lib/LanguageContext';
+import { LanguageSwitcher } from './components/LanguageSwitcher';
 
 function Router() {
   const { route, navigate } = useHashRoute();
@@ -19,8 +21,8 @@ function Router() {
   const path = route.path;
 
   // Auth pages (no nav/footer)
-  if (path === '/login') return <AuthPage mode="login" navigate={navigate} />;
-  if (path === '/register') return <AuthPage mode="register" navigate={navigate} />;
+  if (path === '/login') return <><div className="fixed right-4 top-4 z-50"><LanguageSwitcher /></div><AuthPage mode="login" navigate={navigate} /></>;
+  if (path === '/register') return <><div className="fixed right-4 top-4 z-50"><LanguageSwitcher /></div><AuthPage mode="register" navigate={navigate} /></>;
 
   // Dashboard routes (no footer, custom nav)
   const dashMatch = matchPath('/dashboard/:role', path);
@@ -73,7 +75,9 @@ function Router() {
 function App() {
   return (
     <AuthProvider>
-      <Router />
+      <LanguageProvider>
+        <Router />
+      </LanguageProvider>
     </AuthProvider>
   );
 }
