@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Hind Siliguri', 'Inter', system-ui, sans-serif;
+  background-color: #f5f7fa;
+  color: #1f2d3d;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  .btn-primary {
+    @apply btn bg-ink-900 text-white hover:bg-ink-800 active:scale-[0.98] shadow-soft;
+  }
+  .btn-gold {
+    @apply btn bg-gold-500 text-ink-950 hover:bg-gold-400 active:scale-[0.98] shadow-soft;
+  }
+  .btn-outline {
+    @apply btn border border-ink-200 bg-white text-ink-800 hover:border-ink-300 hover:bg-ink-50;
+  }
+  .btn-ghost {
+    @apply btn text-ink-700 hover:bg-ink-100;
+  }
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700;
+  }
+  .card {
+    @apply rounded-2xl border border-ink-100 bg-white shadow-card;
+  }
+  .input {
+    @apply w-full rounded-xl border border-ink-200 bg-white px-3.5 py-2.5 text-sm text-ink-900 placeholder-ink-400 outline-none transition focus:border-ink-400 focus:ring-4 focus:ring-gold-500/15;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-ink-500;
+  }
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink-200 bg-white px-3 py-1.5 text-xs font-medium text-ink-700 transition hover:border-gold-400 hover:text-ink-900;
+  }
+  .chip-active {
+    @apply border-gold-500 bg-gold-50 text-ink-900;
+  }
+  .section-title {
+    @apply font-display text-2xl font-bold tracking-tight text-ink-900 sm:text-3xl;
+  }
+  .stat-card {
+    @apply card flex items-center gap-4 p-5;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cfd8e3;
+  border-radius: 999px;
+  border: 2px solid #f5f7fa;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a7b6c8;
+}
+
+/* Subtle pattern for hero */
+.hero-pattern {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(31, 45, 61, 0.07) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.gradient-gold {
+  background: linear-gradient(135deg, #d4a73b 0%, #c1912a 50%, #83591b 100%);
+}
+.gradient-ink {
+  background: linear-gradient(135deg, #1f2d3d 0%, #2a3d53 50%, #3e5a7a 100%);
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #e9edf3 25%, #f5f7fa 50%, #e9edf3 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}

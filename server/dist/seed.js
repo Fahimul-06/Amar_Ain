@@ -1,0 +1,18 @@
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import { v4 as uuid } from 'uuid';
+import { env } from './config/env.js';
+import { User, tables } from './models/index.js';
+await mongoose.connect(env.mongoUri);
+const now = new Date();
+const adminEmail = process.env.ADMIN_EMAIL || 'admin@amarain.com';
+if (!await User.findOne({ email: adminEmail })) {
+    const id = uuid();
+    await User.create({ id, email: adminEmail, password_hash: await bcrypt.hash(process.env.ADMIN_PASSWORD || 'Admin123!', 12), role: 'admin', full_name: 'Amar Ain Admin', is_active: true, created_at: now, updated_at: now });
+    await tables.get('profiles').create({ id, full_name: 'Amar Ain Admin', role: 'admin', is_active: true, created_at: now, updated_at: now });
+}
+const cats = [['Family Law', 'পারিবারিক আইন'], ['Criminal Law', 'ফৌজদারি আইন'], ['Property Law', 'সম্পত্তি আইন'], ['Corporate Law', 'কর্পোরেট আইন'], ['Cyber Law', 'সাইবার আইন']];
+for (const [name, name_bn] of cats)
+    await tables.get('lawyer_categories').updateOne({ name }, { $setOnInsert: { id: uuid(), name, name_bn, created_at: now, updated_at: now } }, { upsert: true });
+console.log('Seed complete');
+await mongoose.disconnect();
